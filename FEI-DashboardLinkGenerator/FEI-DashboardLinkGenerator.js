@@ -100,7 +100,7 @@ define(['jquery', 'qlik', 'angular', 'ng!$q', 'css!./FEI-DashboardLinkGenerator.
             //Obtaining the global object to use it for generating the first part of the App Integration API's URI (host/ip, app id, sheet id)
             var config = {
                 host: window.location.hostname,
-                prefix: window.location.pathname.substr(0, window.location.pathname.toLowerCase().lastIndexOf("/extensions") + 1),
+                prefix: window.location.pathname.substr(0, window.location.pathname.toLowerCase().lastIndexOf("/sense/app") + 1),
                 port: window.location.port,
                 isSecure: window.location.protocol === "https:"
             };
@@ -126,7 +126,7 @@ define(['jquery', 'qlik', 'angular', 'ng!$q', 'css!./FEI-DashboardLinkGenerator.
 
             /*Creating base part of URL including clearing any leftover 
             selections before opening the new page with our selections*/
-            var baseURL = (config.isSecure ? "https://" : "http://" ) + config.host + (config.port ? ":" + config.port : "" ) + "/sense/app/" + applicationIdFr + "/sheet/" + SheetID + "/state/analysis/options/clearselections";
+            var baseURL = (config.isSecure ? "https://" : "http://" ) + config.host + (config.port ? ":" + config.port : "" ) + (config.prefix ? "/" + config.prefix.replace(/\//g, "") : "") + "/sense/app/" + applicationIdFr + "/sheet/" + SheetID + "/state/analysis/options/clearselections";
 
             //If the user chose to output the link through an email, only create a button, otherwise create a textbox as well
             if(layout.outputMethod == "email"){
